@@ -3,10 +3,13 @@ const mongoose= require('mongoose')
 
 const AdminSchema=new mongoose.Schema({
 
-    title:String,
-    category:String,
-    description:String,
-    price:Number,
+    
+      course:String,
+      price: Number,
+      level: String,
+      duration: String,
+      instructor: String,
+      rating: Number,
 
 },
 {
