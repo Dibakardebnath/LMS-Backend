@@ -68,8 +68,8 @@ app.post("/login", async (req, res) => {
 // .................................................................................
 
 app.get("/",async(req, res)=>{
-  const {search,sortby,page,limit,order}=req.query
-
+  const{course,sortby,page,limit,order}=req.query
+console.log(course)
   let pageno=page
   let limitperpage=limit
   let skip=(pageno-1)*limitperpage
@@ -77,12 +77,13 @@ app.get("/",async(req, res)=>{
   try {
    let user;
    let query={}
-   
-   if(search){
-       const regexp=new RegExp(search,"i")
-       query.title=regexp
-   }
 
+
+   
+   if(course){
+       const regexp=new RegExp(course,"i")
+       query.course=regexp
+   }
 
    let sortquery={}
 
@@ -92,6 +93,7 @@ app.get("/",async(req, res)=>{
 
    if(pageno &&  limitperpage){
        user=await AdminModel.find(query).sort(sortquery).skip(skip).limit(limitperpage)
+       console.log(user)
    }else if(pageno){
        user=await AdminModel.find(query).sort(sortquery).skip(skip).limit(limitperpage)
    }else{
